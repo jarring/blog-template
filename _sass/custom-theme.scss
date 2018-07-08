@@ -1,0 +1,39 @@
+
+p {
+	text-indent: 2em;
+}
+
+div.wrapper {
+	width:80%;
+}
+
+div.current-section {
+	left: 10%;
+	width: 80%;
+	margin-left: 0;
+}
+
+span.label {
+	font-size: 80%;
+	color: #aaa;
+	font-weight:bold;
+	margin-right: 5px;
+}
+
+span.text {
+	font-size: 70%;
+	color: #fff;
+	font-style: italic;
+	margin-right: 10px;
+}
+
+span.right {
+	float: right;
+	font-size: 80%;
+}
+
+.markdown-body table {
+	width:100%;
+	margin-left: 0;
+	margin-right: 0;
+}

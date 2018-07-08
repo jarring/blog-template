@@ -1,0 +1,72 @@
+---
+layout: default
+---
+
+
+<script src="{{ '/assets/js/tools.js' | relative_url }}"></script>
+
+<div>
+  <ul class="post-list">
+    <!--
+        Here is the main paginator logic called.
+        All calls to site.posts should be replaced by paginator.posts
+    -->
+    {% for post in paginator.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }} {{ post.tags | join: "," }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+  {% else %}
+    <span>&laquo; Prev</span>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <em>{{ page }}</em>
+    {% elsif page == 1 %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', '' | replace: '//', '/'}}">{{ page }}</a>
+    {% else %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', page | replace: '//', '/' }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+<select 
+	pageMax="{{ paginator.total_pages }}"
+        pageUrl="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' }}"
+	onchange="javascript:jump(this.selectedIndex + 1, this.getAttribute('pageMax'), this.getAttribute('pageUrl'));">
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <option selected>{{ page }}</option>
+    {% elsif page == 1 %}
+      <option value="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', '' | replace: '//', '/'}}">{{ page }}</option>
+    {% else %}
+      <option value="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', page | replace: '//', '/' }}">{{ page }}</option>
+    {% endif %}
+  {% endfor %}
+</select>
+
+<input 
+	size="5" 
+	value="{{paginator.page}}" 
+	pageMax="{{ paginator.total_pages }}"
+	pageUrl="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' }}"
+	onchange="javascript:jump(this.value, this.getAttribute('pageMax'), this.getAttribute('pageUrl'));"/> / {{ paginator.total_pages }}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+  {% else %}
+    <span>Next &raquo;</span>
+  {% endif %}
+</div>
+{% endif %}
