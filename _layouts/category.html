@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<ul>
+{% for post in site.categories[page.category] %}
+    <li><a href="{{ post.url | absolute_url }}">
+      {{ post.title }}
+    </a></li>
+{% endfor %}
+</ul>
+
+
+<ul>
+{% for post in site.tags[page.tag] %}
+    <li><a href="{{ post.url | absolute_url }}">
+      {{ post.title }}
+    </a></li>
+{% endfor %}
+</ul>
+
+<ul>
+{% for c in site.categories %}
+{% for p in c.last %}
+    <li><a href="{{ p.url | absolute_url }}">
+      {{ p.title }}  {{ c.first }}
+    </a></li>
+{% endfor %}
+{% endfor %}
+</ul>
+
+
+{{   site.categories | jsonify }}

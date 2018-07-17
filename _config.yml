@@ -4,6 +4,7 @@ theme: jekyll-theme-time-machine
 lang: zh_CN
 timezone: Asia/Shanghai
 
+plugins: [jekyll-paginate]
 paginate: 5
 paginate_path: "/blog/:num/"
 
